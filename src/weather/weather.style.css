@@ -1,0 +1,19 @@
+.wheather-box {
+    display: inline-block;
+    vertical-align: top;
+    background: #eee;
+    width: 30%;
+    min-height: 300px;
+    margin-right: 1%;
+    margin-bottom: 1%;
+}
+.weather-box-title {
+    border-bottom: 1px solid #fff;
+    padding: .2rem 0;
+    text-align: center;
+}
+.wheather-box-temperature {
+    will-change: color;
+    text-align: center;
+    font: 500 2.3em/1 sans-serif, monospace;
+}
