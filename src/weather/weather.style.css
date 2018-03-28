@@ -1,4 +1,4 @@
-.wheather-box {
+.weather-box {
     display: inline-block;
     vertical-align: top;
     background: #eee;
@@ -12,7 +12,7 @@
     padding: .2rem 0;
     text-align: center;
 }
-.wheather-box-temperature {
+.weather-box-temperature {
     will-change: color;
     text-align: center;
     font: 500 2.3em/1 sans-serif, monospace;

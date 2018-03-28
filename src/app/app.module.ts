@@ -1,12 +1,11 @@
-import { WheatherModule } from './../weather/weather.module';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { TopbarModule } from './../topbar/topbar.module';
+import { WheatherModule } from './../weather/weather.module';
 import { RouteRootModule } from './../routes/route.root';
-
-
-import { AppComponent } from './app.component';
 import { ServicesModule } from '../services/services.module';
 
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +15,7 @@ import { ServicesModule } from '../services/services.module';
     BrowserModule,
     WheatherModule,
     RouteRootModule,
+    TopbarModule,
     ServicesModule.forRoot()
   ],
   providers: [],

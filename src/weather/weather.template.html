@@ -1,11 +1,15 @@
-<div *ngIf="loadingSpin">
+<app-loader-component 
+    [hidden]="loadingHidden">
+</app-loader-component>
+
+<div *ngIf="applicationVisible">
     <div [id]="info.id"
-        class="wheather-box" 
+        class="weather-box" 
         *ngFor="let info of weatherInfo.list">
         <div class="weather-box-title">
             <p>{{ info.name }}, {{ info.sys.country }}</p>
         </div>
-        <p class="wheather-box-temperature" 
+        <p class="weather-box-temperature" 
             [ngStyle]="colorsService.switchTemperatureColors(temperatureService.convertKelvinToCelsius(info.main.temp))">
             <span>{{ temperatureService.convertKelvinToCelsius(info.main.temp) }} &ordm;</span>
         </p>

@@ -1,4 +1,3 @@
-import { ErrorMessageService } from './../services/errormessage.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Subject } from 'rxjs/Subject';
@@ -10,19 +9,23 @@ import { StorageService } from './../services/storage.service';
 import { ColorsService } from './../services/colors.service';
 import { TemperatureService } from './../services/temperature.service';
 import { TimerService } from './../services/timer.service';
+import { ErrorMessageService } from './../services/errormessage.service';
 
 import { Icity } from './../city/city.interface';
 import { Iweather, IweatherList } from './weather.interface';
 
+
 @Component({
+    moduleId: module.id.toString(),
     selector: 'app-weather-component',
     templateUrl: './weather.template.html',
     styleUrls: ['./weather.style.css'],
 })
 export class WeatherComponent implements OnInit {
-    @Input() cityInput?: string;
+    //@Input() cityInput?: string;
     citiesId: string;
-    loadingSpin: boolean;
+    loadingHidden: boolean;
+    applicationVisible: boolean;
     weatherInfo: Iweather;
     wheaterList: Array<IweatherList> = [];
 
@@ -34,19 +37,24 @@ export class WeatherComponent implements OnInit {
         private storageService: StorageService,
         private timerService: TimerService
     ) {
-        this.loadingSpin = false;
         this.citiesId = '';
+        this.applicationVisible = false;
+        this.loadingHidden = false;
     }
 
     private onGetCitiesIdHandler(cities: Array<Icity>): string {
         const ids = cities.map((city: Icity) => city.id);
         return ids.toString();        
     }
+    onSetValuesHandler(info: Iweather): void {
+        this.loadingHidden = true;
+        this.applicationVisible = true;
+        this.weatherInfo = info;
+    }
 
-    private onCheckDataHandler(): void {
+    onCheckDataHandler(): void {
         if(this.storageService.checkStorageContent()) {
-            this.loadingSpin = true;
-            this.weatherInfo = JSON.parse(this.storageService.getCitiesData());
+            this.onSetValuesHandler(JSON.parse(this.storageService.getCitiesData()));
         }
         else {
             this.cityService.loadingCitiesResults()
@@ -55,8 +63,7 @@ export class WeatherComponent implements OnInit {
                     
                     this.weatherService.loadingWeatherResults(this.citiesId)
                         .subscribe((weatherResponse: Iweather) => {
-                            this.loadingSpin = true;
-                            this.weatherInfo = weatherResponse;
+                            this.onSetValuesHandler(weatherResponse);
                             this.storageService.setCitiesData(JSON.stringify(weatherResponse));
                         },
                         (error: Error) => console.log(`error on "weatherService.loadingWeatherResults": ${error}`),

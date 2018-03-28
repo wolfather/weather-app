@@ -1,3 +1,4 @@
+import { LoaderModule } from './../loader/loader.module';
 import { CityService } from './../city/city.service';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,7 +11,8 @@ import { WheatherService } from './weather.service';
     imports: [
         CommonModule,
         HttpClientModule,
-        HttpClientJsonpModule
+        HttpClientJsonpModule,
+        LoaderModule
     ],
     declarations: [WeatherComponent],
     exports: [WeatherComponent],
