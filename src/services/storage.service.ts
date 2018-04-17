@@ -1,3 +1,4 @@
+import { Iweather } from './../weather/weather.interface';
 import { Injectable } from "@angular/core";
 
 @Injectable()
@@ -9,8 +10,8 @@ export class StorageService {
         return !!this.wl;
     }
 
-    setCitiesData(data: string): void {
-        this.checkSupport() && this.wl.setItem(this.CITY_DATA, data);
+    setCitiesData(data: Iweather): void {
+        this.checkSupport() && this.wl.setItem(this.CITY_DATA, JSON.stringify(data));
     }
     
     getCitiesData(): string {

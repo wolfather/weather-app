@@ -64,7 +64,7 @@ export class WeatherComponent implements OnInit {
                     this.weatherService.loadingWeatherResults(this.citiesId)
                         .subscribe((weatherResponse: Iweather) => {
                             this.onSetValuesHandler(weatherResponse);
-                            this.storageService.setCitiesData(JSON.stringify(weatherResponse));
+                            this.storageService.setCitiesData(weatherResponse);
                         },
                         (error: Error) => console.log(`error on "weatherService.loadingWeatherResults": ${error}`),
                         () => console.log('completed'));
